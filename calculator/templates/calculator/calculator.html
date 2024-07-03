@@ -1,0 +1,104 @@
+{% extends 'base.html' %} {% block page_content %}
+<div class="container mt-5">
+  <h1 class="text-primary mb-4" style="font-size: 2rem; font-weight: bold">
+    Anesthesia Drug Calculator
+  </h1>
+
+  <form action="" class="form">
+    <div class="form-row">
+      <div class="form-group col-md-4">
+        <label for="age">Age (years)</label>
+        <input
+          type="number"
+          name="age"
+          id="age"
+          class="form-control"
+          value="{{ request.GET.age }}"
+        />
+      </div>
+      <div class="form-group col-md-4">
+        <label for="height">Height (cm)</label>
+        <input
+          type="number"
+          name="height"
+          id="height"
+          class="form-control"
+          value="{{ request.GET.height }}"
+        />
+      </div>
+      <div class="form-group col-md-4">
+        <label for="weight">Weight (kg)</label>
+        <input
+          type="number"
+          name="weight"
+          id="weight"
+          class="form-control"
+          value="{{ request.GET.weight }}"
+        />
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-6 mb-4">
+        <div class="card h-100">
+          <div class="card-body">
+            <h5 class="card-title">NEP Calculation</h5>
+            <div class="form-group">
+              <label for="nep_conc">NEP concentration (mcg/ml)</label>
+              <input
+                type="number"
+                name="nep_conc"
+                id="nep_conc"
+                class="form-control"
+                value="20"
+              />
+            </div>
+            <div class="form-group">
+              <label for="nep_dr">NEP dose rate (mcg/kg/min)</label>
+              <input
+                type="number"
+                name="nep_dr"
+                id="nep_dr"
+                class="form-control"
+                value="0.01"
+              />
+            </div>
+            <p id="nep_result">NEP c.i.(ml/hr): {{ nep_result }}</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6 mb-4">
+        <div class="card h-100">
+          <div class="card-body">
+            <h5 class="card-title">EPI Calculation</h5>
+            <div class="form-group">
+              <label for="epi_conc">EPI concentration (mcg/ml)</label>
+              <input
+                type="number"
+                name="epi_conc"
+                id="epi_conc"
+                class="form-control"
+                value="20"
+              />
+            </div>
+            <div class="form-group">
+              <label for="epi_dr">EPI dose rate (mcg/kg/ml)</label>
+              <input
+                type="number"
+                name="epi_dr"
+                id="epi_dr"
+                class="form-control"
+                value="0.01"
+              />
+            </div>
+            <p id="epi_result">EPI c.i.(ml/hr): {{ epi_result }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <button type="submit" class="btn btn-primary btn-block">Calculate</button>
+  </form>
+</div>
+{% endblock %}

@@ -1,0 +1,75 @@
+{% extends 'base.html' %} {% block page_content %}
+<h1>Questions for {{ exam.title }}</h1>
+
+<form action="{% url 'your_submit_view_url_name' %}" method="post">
+  {% csrf_token %} {% for question in questions %}
+  <div>
+    <h3>{{ question.question_text }}</h3>
+    {% if question.image %}
+    <img
+      src="{{ question.image.url }}"
+      alt="Question Image"
+      style="max-width: 60%; height: auto"
+    />
+    {% endif %}<br />
+    <label
+      ><input
+        type="radio"
+        name="question_{{ question.id }}"
+        value="{{ question.option1 }}"
+      />{{ question.option1 }}</label
+    ><br />
+    <label
+      ><input
+        type="radio"
+        name="question_{{ question.id }}"
+        value="{{ question.option2 }}"
+      />{{ question.option2 }}</label
+    ><br />
+    <label
+      ><input
+        type="radio"
+        name="question_{{ question.id }}"
+        value="{{ question.option3 }}"
+      />{{ question.option3 }}</label
+    ><br />
+    <label
+      ><input
+        type="radio"
+        name="question_{{ question.id }}"
+        value="{{ question.option4 }}"
+      />{{ question.option4 }}</label
+    ><br />
+    <label
+      ><input
+        type="radio"
+        name="question_{{ question.id }}"
+        value="{{ question.option5 }}"
+      />{{ question.option5 }}</label
+    ><br />
+    <button
+      type="button"
+      onclick="showAnswer('{{ question.correct_option }}', this)"
+    >
+      정답 표시
+    </button>
+  </div>
+  {% endfor %}
+  <input type="submit" value="Submit Answers" />
+</form>
+
+<script>
+  function showAnswer(answer, button) {
+    // alert를 통해 정답을 표시
+    // alert("정답은: " + answer);
+
+    // 또는 버튼 옆에 정답을 직접 표시
+    const answerSpan = document.createElement("span");
+    answerSpan.textContent = " 정답은: " + answer;
+    button.parentNode.appendChild(answerSpan);
+
+    // 버튼 비활성화 : 지금 상태로 두면 잘 사용할 수 있음.
+    button.disabled = true;
+  }
+</script>
+{% endblock %}
