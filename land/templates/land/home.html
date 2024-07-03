@@ -12,7 +12,7 @@
       <div class="card-body">
         <h5 class="card-title">Coagulation Guideline</h5>
         <p class="card-text">Find the latest coagulation guidelines.</p>
-        <a href="http://127.0.0.1:8000/coag" class="btn btn-primary">Go</a>
+        <a href="{% url 'coag_index' %}" class="btn btn-primary">Go</a>
       </div>
     </div>
   </div>
@@ -21,9 +21,7 @@
       <div class="card-body">
         <h5 class="card-title">Drug Calculator</h5>
         <p class="card-text">Accurate drug dosage calculations.</p>
-        <a href="http://127.0.0.1:8000/calculator" class="btn btn-primary"
-          >Go</a
-        >
+        <a href="{% url 'calculator' %}" class="btn btn-primary">Go</a>
       </div>
     </div>
   </div>
@@ -32,7 +30,7 @@
       <div class="card-body">
         <h5 class="card-title">Board</h5>
         <p class="card-text">Join discussions and share knowledge.</p>
-        <a href="http://127.0.0.1:8000/board" class="btn btn-primary">Go</a>
+        <a href="{% url 'board_index' %}" class="btn btn-primary">Go</a>
       </div>
     </div>
   </div>
@@ -41,7 +39,7 @@
       <div class="card-body">
         <h5 class="card-title">Question Bank</h5>
         <p class="card-text">More information about board exam.</p>
-        <a href="http://127.0.0.1:8000/exam" class="btn btn-primary">Go</a>
+        <a href="{% url 'exam_list' %}" class="btn btn-primary">Go</a>
       </div>
     </div>
   </div>
