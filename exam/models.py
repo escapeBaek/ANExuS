@@ -19,6 +19,8 @@ class Question(models.Model):
     option4 = models.CharField(max_length=200, default='default')
     option5 = models.CharField(max_length=200, default='default')
     correct_option = models.CharField(max_length=200, default='default')
+    comment = models.TextField(default='default')
+    comment_image = models.ImageField(upload_to='question_images/', blank=True, null=True)
 
     def __str__(self):
         return self.question_text

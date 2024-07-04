@@ -3,73 +3,129 @@
 
 <form action="{% url 'your_submit_view_url_name' %}" method="post">
   {% csrf_token %} {% for question in questions %}
-  <div>
-    <h3>{{ question.question_text }}</h3>
+  <div class="question-block mb-5 p-3 border rounded">
+    <h3 class="question-text" style="font-size: 1.25rem">
+      {{ question.question_text }}
+    </h3>
     {% if question.image %}
     <img
       src="{{ question.image.url }}"
       alt="Question Image"
-      style="max-width: 60%; height: auto"
+      class="img-fluid my-3"
     />
-    {% endif %}<br />
-    <label
-      ><input
-        type="radio"
-        name="question_{{ question.id }}"
-        value="{{ question.option1 }}"
-      />{{ question.option1 }}</label
-    ><br />
-    <label
-      ><input
-        type="radio"
-        name="question_{{ question.id }}"
-        value="{{ question.option2 }}"
-      />{{ question.option2 }}</label
-    ><br />
-    <label
-      ><input
-        type="radio"
-        name="question_{{ question.id }}"
-        value="{{ question.option3 }}"
-      />{{ question.option3 }}</label
-    ><br />
-    <label
-      ><input
-        type="radio"
-        name="question_{{ question.id }}"
-        value="{{ question.option4 }}"
-      />{{ question.option4 }}</label
-    ><br />
-    <label
-      ><input
-        type="radio"
-        name="question_{{ question.id }}"
-        value="{{ question.option5 }}"
-      />{{ question.option5 }}</label
-    ><br />
+    {% endif %}
+    <div class="options mb-3">
+      <label class="d-block">
+        <input
+          type="radio"
+          name="question_{{ question.id }}"
+          value="{{ question.option1 }}"
+        />
+        {{ question.option1 }}
+      </label>
+      <label class="d-block">
+        <input
+          type="radio"
+          name="question_{{ question.id }}"
+          value="{{ question.option2 }}"
+        />
+        {{ question.option2 }}
+      </label>
+      <label class="d-block">
+        <input
+          type="radio"
+          name="question_{{ question.id }}"
+          value="{{ question.option3 }}"
+        />
+        {{ question.option3 }}
+      </label>
+      <label class="d-block">
+        <input
+          type="radio"
+          name="question_{{ question.id }}"
+          value="{{ question.option4 }}"
+        />
+        {{ question.option4 }}
+      </label>
+      <label class="d-block">
+        <input
+          type="radio"
+          name="question_{{ question.id }}"
+          value="{{ question.option5 }}"
+        />
+        {{ question.option5 }}
+      </label>
+    </div>
     <button
       type="button"
+      class="btn btn-primary btn-sm mr-2"
       onclick="showAnswer('{{ question.correct_option }}', this)"
     >
       정답 표시
     </button>
+    <button
+      type="button"
+      class="btn btn-secondary btn-sm"
+      onclick="showComment('{{ question.comment|linebreaksbr }}', this)"
+    >
+      해설 표시
+    </button>
   </div>
   {% endfor %}
-  <input type="submit" value="Submit Answers" />
+  <input type="submit" value="Submit Answers" class="btn btn-success mt-4" />
 </form>
 
 <script>
   function showAnswer(answer, button) {
-    // alert를 통해 정답을 표시
-    // alert("정답은: " + answer);
+    const existingAnswerSpan = button.parentNode.querySelector(".answer-span");
 
-    // 또는 버튼 옆에 정답을 직접 표시
-    const answerSpan = document.createElement("span");
-    answerSpan.textContent = " 정답은: " + answer;
-    button.parentNode.appendChild(answerSpan);
+    if (existingAnswerSpan) {
+      button.parentNode.removeChild(existingAnswerSpan);
+    } else {
+      const answerSpan = document.createElement("span");
+      answerSpan.textContent = " 정답은: " + answer;
+      answerSpan.classList.add("answer-span", "badge", "badge-success", "ml-2");
+      answerSpan.style.wordWrap = "break-word";
+      button.parentNode.appendChild(answerSpan);
+    }
+  }
 
-    // 버튼 비활성화 : 지금 상태로 두면 잘 사용할 수 있음.
-    button.disabled = true;
+  function showComment(comment, button) {
+    const existingCommentSpan =
+      button.parentNode.querySelector(".comment-span");
+
+    if (existingCommentSpan) {
+      button.parentNode.removeChild(existingCommentSpan);
+    } else {
+      const commentSpan = document.createElement("span");
+      commentSpan.innerHTML = " 해설: " + comment;
+      commentSpan.classList.add("comment-span", "ml-2");
+      commentSpan.style.wordWrap = "break-word";
+      commentSpan.style.whiteSpace = "pre-wrap";
+      commentSpan.style.fontSize = "1.1rem";
+      commentSpan.style.color = "#4A4A4A";
+      commentSpan.style.backgroundColor = "#F0F0F0";
+      commentSpan.style.padding = "5px";
+      commentSpan.style.borderRadius = "5px";
+      button.parentNode.appendChild(commentSpan);
+
+    }
   }
 </script>
+
+<style>
+  .question-block {
+    background-color: #fafafa;
+  }
+  .question-text {
+    margin-bottom: 10px;
+  }
+  .options label {
+    font-size: 1rem;
+    margin-bottom: 5px;
+  }
+  .btn {
+    margin-top: 10px;
+  }
+</style>
 {% endblock %}
