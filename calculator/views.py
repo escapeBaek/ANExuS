@@ -150,7 +150,7 @@ def calculator(request):
         suftn_result2 = (weight*1.5)/suftn_conc
         
     #TXA Calculation
-    if weight and txa_conc and txa_dr:
+    if weight and txa_conc:
         txa_conc = float(txa_conc)
         txa_result1 = (weight*10*3)/(txa_conc)
         txa_result2 = (weight*1)/(txa_conc)
