@@ -333,6 +333,29 @@
         </div>
       </div>
     </div>
+    <div class="row">
+      <div class="col-md-6 mb-4">
+        <div class="card h-100 shadow-sm">
+          <div class="card-body">
+            <h5 class="card-title">TXA Calculation</h5>
+            <div class="form-group">
+              <label for="txa_conc">TXA concentration (mg/ml)</label>
+              <input
+                type="number"
+                name="txa_conc"
+                id="txa_conc"
+                class="form-control"
+                value="100"
+              />
+            </div>
+            <p id="txa_result1">
+              TXA Loading(ml/hr)(for 20min): {{ txa_result1 }}
+            </p>
+            <p id="txa_result2">TXA c.i.(ml/hr): {{ txa_result2 }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
   </form>
 
   <button
